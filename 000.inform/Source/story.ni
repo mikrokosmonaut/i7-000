@@ -83,11 +83,12 @@ After printing the name of the sphere while doing something other than examining
 
 Instead of examining a reflective thing (called mirror):
 	let reflection be a random other reflectable thing;
-	say "In [the mirror], [we] see a reflection of [the reflection].[run paragraph on]";
+	say "In [the mirror], [we] [one of]see[or]glimpse[or]catch[or]notice[at random] a reflection of [the reflection]. [first time][we] wonder what else [we] might be able to see there. [only][run paragraph on]";
 	if the mirror-image of the reflection is "":
 		say "[paragraph break]";
 	otherwise:
-		say " [mirror-image of the reflection].".
+		say "[mirror-image of the reflection].";
+	the rule succeeds.
 
 Section 2 - Rules
 
@@ -109,6 +110,18 @@ Instead of listening when the chain is in the large bulb and the ice-state of th
 	
 Instead of listening when the chain is in the large bulb and the sphere is melted:
 	say "It sounds like it's coming from within the sphere.".
+	
+Instead of examining a pedestal:
+	if the number of things supported by the noun is greater than 0:
+		try examining a random thing which is supported by the noun;
+	otherwise:
+		say "You see nothing interesting about [the noun].".
+		
+Instead of examining the central platform:
+	if the number of things contained by the field is greater than 0:
+		try examining a random thing which is contained by the field;
+	otherwise:
+		say "You see nothing interesting about [the noun].".
 
 Every turn when the large bulb is lit:
 	if the sphere is not puddles and a random chance of 4 in 10 succeeds:
@@ -121,7 +134,8 @@ Every turn when the large bulb is lit:
 		otherwise if sphere is puddles:
 			say "The last of the sphere melts, leaving behind a large [if the bulb is lit]glowing [end if]bulb. Underneath the bulb is [a puddle]. It seems the area carved out for the sphere of ice was done in the shape of a [']9['].";
 			now the sphere is nowhere;
-			move the large bulb to the right platform;
+			unless the large bulb is broken:
+				move the large bulb to the right platform;
 			move the puddle to the right platform;
 			increment the score.
 
@@ -194,6 +208,9 @@ Check attacking when the the hammer is not carried by the player:
 		say "What am I supposed to break that with? My hands?";
 		stop the action.
 		
+Instead of attacking the large bulb when Heating is happening:
+	say "[We] can't get a good enough angle with the hammer while the ice is still in the way.".
+		
 Carry out attacking the large bulb:
 	now the large bulb is nowhere;
 	move the chain to the field;
@@ -262,10 +279,10 @@ Carry out entering code "6-0-8":
 	now the exit is unlocked.
 
 After entering code "000":
-	say "[We] didn't really think was that going to work, did [we]?".
+	say "[We] didn't really think that was going to work, did [we]? [The exit] does, however, give off an encouraging [']click[']. That said, [we]['re] pretty sure that the door is still locked.".
 	
 After entering code "0-0-0":
-	say "[We] didn't really think that was going to work, did [we]?".
+	say "[We] didn't really think that was going to work, did [we]? [The exit] does, however, give off an encouraging [']click[']. That said, [we]['re] pretty sure that the door is still locked.".
 		
 After entering code "608":
 	say "[The exit] gives off a loud [']thud[']. The sound of success.".
@@ -278,9 +295,10 @@ Report entering code:
 	let B be character number 2 in the topic understood;
 	let C be character number 3 in the topic understood;
 	if A is "6" or B is "0" or C is "8":
-		say "[The exit] gives off an encouraging [']click[']. That said, [we]['re] pretty sure that the door is still locked.";
+		say "[The exit] gives off an encouraging [']click[']. That said, [we]['re] pretty sure that the door is still locked.[run paragraph on]";
 	otherwise:
-		say "The panel resets itself to [fixed letter spacing]0-0-0[variable letter spacing]. Apparently, that didn't work.".
+		say "Nothing happens.[run paragraph on]";
+	say " The panel resets itself to [fixed letter spacing]0-0-0[variable letter spacing].".
 
 Part 2 - Content
 
@@ -347,17 +365,17 @@ The field is an fixed in place unopenable open container on the central platform
 
 The sphere is a fixed in place opaque unopenable closed container on the right platform. The sphere is ice. The sphere has an ice-state. The description of the sphere is "A perfectly sculpted sphere made entirely out of ice[if the ice-state of the sphere is greater than dripping]. At least it was until you started playing with it[end if]. I bet it's cold to the touch.".
 
-The puddle is a fixed in place scenery. It is oddly-shaped. Understand "puddles" as the puddle. The description of it is "The water outlines the shape of a [']9['].". The mirror-image of the puddle is "The water outlines the shape of a [']6[']".
+The puddle is a fixed in place scenery. It is oddly-shaped. Understand "puddles" as the puddle. The description of it is "The water on the right platform outlines the shape of a [']9['].". The mirror-image of the puddle is "In the reflection, the water on the right platform seems to outline the shape of a [']6[']. How interesting! It looks like a [']9['] from where [we]['re] standing".
 
 The rope is a thing on the central platform. The rope is hemp. The rope has a tangled-state. The description of it is "It looks more like something you'd find at a primary school than something Indiana Jones might carry.[if the rope is tangled] It's all tangled. [We] wonder if [we] could untangle it.". The indefinite article of the rope is "some".
 
-The large bulb is a closed unopenable transparent fixed in place container. The large bulb is glass. The large bulb can be lit or unlit. It is unlit. The large bulb is in the sphere.
+The large bulb is a closed unopenable transparent fixed in place container. The large bulb can be broken. The large bulb is glass. The large bulb can be lit or unlit. It is unlit. The large bulb is in the sphere.
 
-The chain is in the large bulb. The chain is nickel. The description of the chain is "[if the chain is in the large bulb]It's hard to get a good look at it while it's inside the glass. There must be some way of getting it out. Maybe I could smash the glass[otherwise if the chain is in the field]The hand-crafted [chain] floats in the shape of a zero in [the field][otherwise]A beautifully hand-crafted chain made of nickel. It reminds you of the type of thing your aunt Selma would choose to wear[end if].".
+The chain is in the large bulb. The chain is nickel. The description of the chain is "[if the chain is in the large bulb]It's hard to get a good look at it while it's inside the glass. There must be some way of getting it out. Maybe I could smash the glass[otherwise if the chain is in the field]The hand-crafted [chain] floats in the shape of a zero in [the field] above the central platform[otherwise]A beautifully hand-crafted chain made of nickel. It reminds you of the type of thing your aunt Selma would choose to wear[end if].".
 
-The shards are fixed in place scenery. The shards are glass. The shards are plural-named. The description of the shards is "[We] wonder who gets paid to clean this up afterwards.".
+The shards are fixed in place scenery. The shards are glass. The shards are plural-named. The description of the shards is "The [shards] are scattered all over the right platform. [We] wonder who gets paid to clean this up afterwards.".
 
-The hammer is a thing. The hammer is nickel. The description of the hammer is "It's incredibly light, but feels strong enough to do some damage.".
+The hammer is a thing. The hammer is nickel. The description of the hammer is "[The hammer]'s incredibly light, but feels strong enough to do some damage.[if the hammer is in the field] It's currently floating in the [field] above the central platform.".
 
 Chapter 3 - Testing
 
