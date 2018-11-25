@@ -32,11 +32,9 @@ Definition: a thing is meltable if it is made of ice.
 Definition: a thing is reflective if it is mirrored.
 Definition: a thing is invisible if it is magnetic.
 Definition: a thing is reflectable:
-	if it is enclosed by the player:
+	if it is enclosed by the player or it is not enclosed by the location:
 		no;
-	if it is invisible:
-		no;
-	if it is not enclosed by the location:
+	if it is invisible or it is a pedestal:
 		no;
 	if it is visible:
 		yes;
@@ -118,10 +116,10 @@ Every turn when the large bulb is lit:
 		if the sphere is melting:
 			say "[We] can't help but notice that the sphere is melting at quite a fast rate.";
 		otherwise if the sphere is melted:
-			say "A large area of the sphere caves in before [our] eyes.";
+			say "A large area of the sphere caves in before [our] eyes, at once identifying the light source as a large bulb inside of the sphere.";
 			now the sphere is open;
 		otherwise if sphere is puddles:
-			say "The last of the sphere melts, leaving behind it [a puddle]. It seems the area carved out for the sphere of ice was done in the shape of a [']9['].";
+			say "The last of the sphere melts, leaving behind a large [if the bulb is lit]glowing [end if]bulb. Underneath the bulb is [a puddle]. It seems the area carved out for the sphere of ice was done in the shape of a [']9['].";
 			now the sphere is nowhere;
 			move the large bulb to the right platform;
 			move the puddle to the right platform;
@@ -280,7 +278,7 @@ Report entering code:
 	let B be character number 2 in the topic understood;
 	let C be character number 3 in the topic understood;
 	if A is "6" or B is "0" or C is "8":
-		say "[The exit] gives off an encouraging [']click[']. That said, [we]['re] pretty sure that the door is still unlocked.";
+		say "[The exit] gives off an encouraging [']click[']. That said, [we]['re] pretty sure that the door is still locked.";
 	otherwise:
 		say "The panel resets itself to [fixed letter spacing]0-0-0[variable letter spacing]. Apparently, that didn't work.".
 
@@ -309,18 +307,14 @@ Chapter 2 - Rooms
 
 Section 1 - The Chamber
 
-The Chamber is a room. The tiles and the platforms are in the chamber. The description of the chamber is "You are surrounded on all sides by [tiles]. Three [platforms] stand against the back wall opposite [the exit]. Due to the ever-so-slightly variance in height, the various puzzles stand like olympic athletes[if the number of things contained by the field is greater than 0]. [The list of things contained by the field] float[s] in the air roughly a metre or so above the central platform[end if].".
+The Chamber is a room. The tiles and the platforms are in the chamber. The description of the chamber is "You are surrounded on all sides by [tiles]. Three [platforms] stand against the back wall opposite [the exit]. Due to the ever-so-slight variance in height, the various puzzles stand like olympic athletes[if the number of things contained by the field is greater than 0]. [The list of things contained by the field] float[s] in the air roughly a metre or so above the central platform[end if].".
 
-The exit is a locked door. It is south of the Chamber and north of Debriefing. The description of the door is "There's a panel on the exit door reading ['][fixed letter spacing]0-0-0[variable letter spacing]['].[paragraph break][bold type]Note: [roman type]Try typing ['][fixed letter spacing]enter 000[variable letter spacing]['] to enter a code into the door.". Understand "door" or "panel" as the exit.
+The exit is a locked door. It is south of the Chamber and north of Debriefing. The description of the door is "There's a panel on the exit door reading ['][fixed letter spacing]0-0-0[variable letter spacing]['].[paragraph break][bold type]Note: [roman type]Try typing ['][fixed letter spacing]enter 999[variable letter spacing]['] to enter a code into the door.". Understand "door" or "panel" as the exit.
 
 The tiles are scenery. The tiles are mirrored. The tiles are plural-named. Understand "wall" or "walls" as the tiles.
 
 The platforms are a scenery supporter. The left platform, the central platform and the right platform are pedestals in the Chamber. The description of the platforms is "[platform-state].".
 The mirror-image of the platforms is "[mirrored-platform-state]".
-
-The mirror-image of the left platform is "[if Rampage has ended][mirror-image of the torn pieces of shade][end if]".
-The mirror-image of the central platform is "[if Magnetism has ended and the chain is in the field][mirror-image of the chain][end if]".
-The mirror-image of the right platform is "[if Heating has ended][mirror-image of the puddle][end if]".
 
 [Some activities to print the current collective state of the platforms for both examining and looking in the mirror]	
 To say platform-state:
@@ -355,7 +349,7 @@ The sphere is a fixed in place opaque unopenable closed container on the right p
 
 The puddle is a fixed in place scenery. It is oddly-shaped. Understand "puddles" as the puddle. The description of it is "The water outlines the shape of a [']9['].". The mirror-image of the puddle is "The water outlines the shape of a [']6[']".
 
-The rope is a thing on the central platform. The rope is hemp. The rope has a tangled-state. The description of it is "It looks more like something you might find at a primary school than something Indiana Jones might carry.[if the rope is tangled] It's all tangled. [We] wonder if [we] could untangle it.". The indefinite article of the rope is "some".
+The rope is a thing on the central platform. The rope is hemp. The rope has a tangled-state. The description of it is "It looks more like something you'd find at a primary school than something Indiana Jones might carry.[if the rope is tangled] It's all tangled. [We] wonder if [we] could untangle it.". The indefinite article of the rope is "some".
 
 The large bulb is a closed unopenable transparent fixed in place container. The large bulb is glass. The large bulb can be lit or unlit. It is unlit. The large bulb is in the sphere.
 
